@@ -29,7 +29,7 @@ const Home = () => {
                     transition={{ duration: 1 }}
                     className="w-2/3 flex flex-col text-center mx-20 mt-20 justify-center items-center">
                     <h1 className='md:text-5xl text-3xl'><i className='bg-gradient-to-r from-green-300 to-green-600 bg-clip-text text-transparent'>Sustainable products</i> at affordable prices</h1>
-                    <button className='text-xl bg-white rounded- w-40 p-2 font-bold font-serif border-black border-2 hover:bg-green-300 hover:border-2 transition-all mt-6 shadow-[4px_4px_black]'><Link to="products" smooth>shop</Link></button>
+                    <Link to="products" smooth className='text-xl bg-white rounded- w-40 p-2 font-bold font-serif border-black border-2 hover:bg-green-300 hover:border-2 transition-all mt-6 shadow-[4px_4px_black] cursor-pointer'>shop</Link>
                 </motion.div>
             </div>
         </>

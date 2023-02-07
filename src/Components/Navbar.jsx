@@ -1,6 +1,5 @@
 import React from 'react'
 import { ShoppingCartIcon, GlobeAltIcon } from '@heroicons/react/24/solid'
-import { } from 'react-router-dom'
 import { Link } from 'react-scroll'
 
 
