@@ -1,6 +1,9 @@
 import Home from "./Components/Home"
 import Navbar from "./Components/Navbar"
+import ProductItem from "./Components/ProductItem"
 import Products from "./Components/Products"
+import NewsLetter from "./Components/NewsLetter"
+import Footer from "./Components/Footer"
 
 function App() {
 
@@ -9,6 +12,8 @@ function App() {
       <Navbar />
       <Home/>
       <Products/>
+      <NewsLetter/>
+      <Footer/>
     </div>
 
   )
