@@ -29,21 +29,31 @@ const ParticularProduct = () => {
                             <div className="flex flex-col md:flex-row justify-center items-center h-screen w-full">
                                 <motion.div
                                     initial={{ x: 0, opacity: 0 }}
-                                    whileInView={{ x: [250, 0], opacity: 1 }}
+                                    whileInView={{ x: [-250, 0], opacity: 1 }}
                                     transition={{ duration: 1 }}
                                     key={i}
                                     className='mx-10 shadow-xl p-2 rounded-md'>
                                     <img src={src} alt="" className='w-[48rem]' />
                                 </motion.div>
                                 <div className="mt-10 w-1/2">
-                                    <h1 className='mt-2 mb-2 text-2xl'>{desc}</h1>
-                                    <p className='mb-6 text-sm text-gray-500'>Barista's love it!
-                                        Easy to clean, hassle free and Plant Based.
+                                    <motion.div
+                                        initial={{ x: 0, opacity: 0 }}
+                                        whileInView={{ x: [250, 0], opacity: 1 }}
+                                        transition={{ duration: 1 }}
+                                        className="">
+                                        <h1 className='mt-2 mb-2 text-2xl'>{desc}</h1>
+                                        <p className='mb-6 text-sm text-gray-500'>Barista's love it!
+                                            Easy to clean, hassle free and Plant Based.
 
-                                        Sourced from local farmers, plant residue from Bamboo, Wheat, Rice, and Barley is processed and molded into reusable cups which can be used hundreds of times.
+                                            Sourced from local farmers, plant residue from Bamboo, Wheat, Rice, and Barley is processed and molded into reusable cups which can be used hundreds of times.
 
-                                        So, every batch is unique, Just. Like. You.</p>
-                                    <div className="w-3/4 mt-6">
+                                            So, every batch is unique, Just. Like. You.</p>
+                                    </motion.div>
+                                    <motion.div
+                                        initial={{ x: 0, opacity: 0 }}
+                                        whileInView={{ x: [250, 0], opacity: 1 }}
+                                        transition={{ duration: 1.5 }}
+                                     className="w-3/4 mt-6">
                                         <h1 className='mt-1 mb-1 text-2xl'>Features</h1>
                                         <ul className='list-disc mb-6 ml-8 text-sm'>
                                             <li>
@@ -54,7 +64,7 @@ const ParticularProduct = () => {
                                             <li>Lightweight</li>
                                             <li>Microwavable</li>
                                         </ul>
-                                    </div>
+                                    </motion.div>
                                     <Link to={`/`} className='px-4 py-1 text-sm border border-black w-28 h-6 text-black font-bold hover:bg-black hover:text-white cursor-pointer rounded-full mx-auto'>Back To Home</Link>
                                 </div>
                             </div>
