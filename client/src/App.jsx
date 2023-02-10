@@ -6,6 +6,8 @@ import ParticularProduct from "./Components/ParticularProduct"
 import NewsLetter from "./Components/NewsLetter"
 import Footer from "./Components/Footer"
 import { Route, Routes } from "react-router-dom"
+import Login from "./Components/Login"
+import Signup from "./Components/Signup"
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
             </>
           } />
         <Route path="/product/:productid" element={<><ParticularProduct /><Footer/></>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
       </Routes>
     </div>
 

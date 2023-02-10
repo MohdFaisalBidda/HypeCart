@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom'
 const ProductItem = ({ src, desc, id }) => {
   return (
     <motion.div
-      initial={{ x: 0, opacity: 0 }}
-      whileInView={{ x: [250, 0], opacity: 1 }}
-      transition={{ duration: 1 }}
+      initial={{ x: 10, opacity: 0 }}
+      whileInView={{  opacity: 80 }}
+      transition={{ duration: 1.2 }}
 
       className='mx-10 shadow-2xl text-center p-2 rounded-md'>
       <img src={src} alt="" className='w-[32rem]' />
