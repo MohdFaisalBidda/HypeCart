@@ -5,7 +5,7 @@ import { GrLocation } from 'react-icons/gr';
 
 const Footer = () => {
     return (
-        <div className='h-full flex justify-between items-end pt-4 px-8 gap-10 my-4 w-full'>
+        <div className='h-full flex justify-between items-end pt-4 px-8 gap-10 my-4 w-full bottom-0'>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
                 whileInView={{ opacity: 80 }}

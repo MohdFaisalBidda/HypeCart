@@ -24,8 +24,8 @@ const Navbar = () => {
                 transition={{ duration: 1.2 }}
                 className="hidden md:flex text-xl font-mono items-center ">
 
-                <li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><Link to='home' smooth>Home</Link></li>
-                <li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><Link to='products' smooth>Products</Link></li>
+                <li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><ReactLink to={"/"}>Home</ReactLink></li>
+                <li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><ReactLink to={"/category"}>Products</ReactLink></li>
                 <ReactLink to={"/login"}><li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none">Log In</li>
                 </ReactLink>
                 <ReactLink to={"/signup"}><li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none">Sign Up</li>

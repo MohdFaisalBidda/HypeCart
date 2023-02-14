@@ -4,6 +4,8 @@ import eco from "../assets/eco-friendly.png"
 import world from "../assets/world.png"
 import { motion } from "framer-motion"
 import { Link } from 'react-scroll'
+import NewsLetter from './NewsLetter'
+import Category from './Category'
 
 
 
@@ -32,6 +34,8 @@ const Home = () => {
                     <Link to="products" smooth className='text-xl bg-white rounded- w-40 p-2 font-bold font-serif border-black border-2 hover:bg-green-300 hover:border-2 transition-all mt-6 shadow-[4px_4px_black] cursor-pointer'>shop</Link>
                 </motion.div>
             </div>
+            <Category />
+            <NewsLetter />
         </>
     )
 }

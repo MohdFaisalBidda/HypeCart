@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const [data, setData] = useState({ firstName: "", lastName: "", email: "", password: "" });
 
     const handleField = (e) => {
@@ -15,17 +17,19 @@ const Signup = () => {
         fetch('http://localhost:5000/auth/register', {
             method: 'POST', // or 'PUT'
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-          })
+        })
             .then((response) => response.json())
             .then((data) => {
-              console.log('Success:', data);
+                console.log('Success:', data);
+                navigate("/login");
             })
             .catch((error) => {
-              console.error('Error:', error);
+                console.error('Error:', error);
             });
+
     }
 
 

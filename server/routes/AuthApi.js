@@ -1,16 +1,17 @@
 const express = require("express")
 const router = express.Router();
 const { mongoose } = require("mongoose");
-const NEWUser = require("../models/UserModel")
+const bcrypt = require("bcrypt");
+const User = require("../models/UserModel")
 
 
 router.get("/register", async (req, res) => {
     try {
-        const users = await NEWUser.find();
+        const users = await User.find();
         res.status(200).json(users);
 
     } catch (err) {
-        res.status(400).json({message:err.message});
+        res.status(400).json({ message: err.message });
     }
 })
 
@@ -19,18 +20,29 @@ router.get("/register", async (req, res) => {
 router.post("/register", async (req, res) => {
     const { firstName, lastName, email, password } = req.body
 
-    const user = new NEWUser({
-        firstName, lastName, email, password
+    const existsUser = await User.findOne({ email })
+
+    if(existsUser){
+        res.status(406).json({message:"User already exists"})
+    }
+
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
+    const newUser = new User({
+        firstName, lastName, email, password: hashedPassword
     });
 
     try {
-        const newUser = await user.save();
-        res.status(201).json(newUser);
+        const userData = await newUser.save();
+        res.status(201).json(userData);
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
 
     console.log(req.body);
+
 })
 
 
