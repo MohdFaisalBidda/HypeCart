@@ -1,7 +1,7 @@
 {
   "name": "sustainable-kit",
   "private": true,
-  "proxy":"http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.0.14",
     "cors": "^2.8.5",
     "framer-motion": "^9.0.1",
+    "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",

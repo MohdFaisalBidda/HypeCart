@@ -3,6 +3,7 @@ const router = express.Router();
 const { mongoose } = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/UserModel")
+const jwt = require("jsonwebtoken");
 
 
 router.get("/register", async (req, res) => {
@@ -22,8 +23,8 @@ router.post("/register", async (req, res) => {
 
     const existsUser = await User.findOne({ email })
 
-    if(existsUser){
-        res.status(406).json({message:"User already exists"})
+    if (existsUser) {
+        res.status(406).json({ message: "User already exists" })
     }
 
     const saltRounds = 10;
@@ -47,14 +48,39 @@ router.post("/register", async (req, res) => {
 
 
 
-router.get("/login", (req, res) => {
+router.get("/login", async (req, res) => {
     res.json();
+
 })
 
 
 
-router.post("/login", (req, res) => {
-    res.json();
+router.post("/login", async(req, res) => {
+    const { email, password } = req.body
+
+    const user = await User.findOne({ email })
+
+
+    if (!user) {
+        res.status(406).json({ message: "Invalid credentials" })
+        return;
+    }
+
+    const matched = await bcrypt.compare(password, user.password);
+
+    if (!matched) {
+        res.status(406).json({ message: "Invalid credentials" })
+        return;
+    }
+
+    const payload ={
+        email,
+        _id:user._id
+
+    }
+
+    const token = jwt.sign(payload, "Secret Key.")
+    res.json({ message: "successfully LoggedIn ", token })
 })
 
 
