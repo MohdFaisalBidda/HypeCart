@@ -20,7 +20,7 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="/category" element={<Category />} />
           <Route path="/category/:category" element={<CategoryProducts />} />
-          <Route path="/product/:productid" element={<><ParticularProduct /><Footer /></>} />
+          <Route path="/products/:productid" element={<><ParticularProduct /></>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>

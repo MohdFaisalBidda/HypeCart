@@ -1,6 +1,4 @@
-const express = require("express")
-const router = express.Router();
-const { mongoose } = require("mongoose");
+const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/UserModel")
 const jwt = require("jsonwebtoken");
@@ -80,7 +78,8 @@ router.post("/login", async(req, res) => {
     }
 
     const token = jwt.sign(payload, "Secret Key.")
-    res.json({ message: "successfully LoggedIn ", token })
+
+    res.json({ user, token })
 })
 
 

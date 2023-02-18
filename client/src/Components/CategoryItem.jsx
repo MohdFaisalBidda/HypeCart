@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom'
 
 
 
-
 const CategoryItem = ({ src, category, id }) => {
 
   return (
@@ -14,6 +13,9 @@ const CategoryItem = ({ src, category, id }) => {
       transition={{ duration: 1.2 }}
      key={id}
       className='mx-10 shadow-xl text-center rounded-md flex flex-col'>
+
+
+
       <img src={src} alt="" className=' object-contain w-[25rem] h-[20rem] bg-cover' />
       <h1 className='mt-4 mb-2 text-xl font-bold '>{category}</h1>
       <Link to={`/category/${category}`} className='bg-green-200 py-2 cursor-pointer font-medium font-serif rounded-xl'>Show Products</Link>
