@@ -1,12 +1,14 @@
-const router =require("express").Router();
-const product =require("../data")
+const Product = require("../models/ProductModel");
+
+const router = require("express").Router();
 
 
-router.get("/",(req,res)=>{
+router.get("/", async (req, res) => {
     try {
-        res.json(product);
+        const products = await Product.find();
+        res.status(200).send(products);
     } catch (error) {
-        console.log(error);
+        res.status(404).send(error);
     }
 })
 

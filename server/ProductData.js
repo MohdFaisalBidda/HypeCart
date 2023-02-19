@@ -1,4 +1,4 @@
-export const data = [
+ const Productdata = [
     {
         "title": "Leather Straps Wristwatch",
         "description": "Style: Sport , Clasp: Buckles , Water Resistance Depth:3Bar",
@@ -399,3 +399,5 @@ export const data = [
         "price": 349,
     },
 ]
+
+module.exports =Productdata;

@@ -9,14 +9,14 @@ import { Link as ReactLink } from 'react-router-dom'
 const Navbar = () => {
     const [nav, setNav] = useState(false);
     return (
-        <div className='p-6 flex justify-between items-center bg-gradient-to-b from-red-300 to-white h-20 sticky top-0 z-10'>
+        <div className='p-6 flex justify-between items-center h-20 sticky top-0 z-10'>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
                 whileInView={{ opacity: 80 }}
                 transition={{ duration: 1.2 }}
                 className='text-2xl font-medium md:ml-8 flex justify-center items-center cursor-pointer'>
                 <GlobeAltIcon className='h-6' />
-                <h2 className='border-b-2 border-black ml-1 w-8 hover:w-16 transition-all'><Link to='home' smooth>Earthly</Link></h2>
+                <h2 className='border-b-2 border-black ml-1 w-14 hover:w-28 transition-all'><Link to='home' smooth>HypeCart</Link></h2>
             </motion.div>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
