@@ -4,7 +4,7 @@ import React from 'react'
 
 const NewsLetter = () => {
     return (
-        <div className='h-80 bg-green-100 flex flex-col justify-center items-center mt-40'>
+        <div className='h-80 bg-gray-200 flex flex-col justify-center items-center mt-40'>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
                 whileInView={{ opacity: 80 }}
@@ -18,7 +18,7 @@ const NewsLetter = () => {
                 whileInView={{ opacity: 80 }}
                 transition={{ duration: 1.2 }}
                 className="mt-4 flex">
-                <input className='border-4 border-green-400  rounded-full w-80 outline-green-400 text-xl' type="text" />
+                <input className='border-2 border-black  rounded-full w-80 outline-gray-400 text-xl' type="text" />
                 <ArrowRightCircleIcon className='ml-2 w-10 bg-transparent border-2 items-center rounded-full cursor-pointer border-black' />
             </motion.div>
         </div>

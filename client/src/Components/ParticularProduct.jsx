@@ -3,10 +3,6 @@ import { useParams } from 'react-router-dom';
 import { data } from "../../data"
 import { motion } from "framer-motion"
 import { Link } from 'react-router-dom'
-import { GlobeAltIcon } from '@heroicons/react/24/solid'
-
-
-
 
 
 const ParticularProduct = () => {

@@ -24,13 +24,13 @@ const Navbar = () => {
                 transition={{ duration: 1.2 }}
                 className="hidden md:flex text-xl font-mono items-center ">
 
-                <li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><ReactLink to={"/"}>Home</ReactLink></li>
-                <li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><ReactLink to={"/category"}>Products</ReactLink></li>
-                <ReactLink to={"/login"}><li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none">Log In</li>
+                <li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ReactLink to={"/"}>Home</ReactLink></li>
+                <li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ReactLink to={"/category"}>Products</ReactLink></li>
+                <ReactLink to={"/login"}><li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">Log In</li>
                 </ReactLink>
-                <ReactLink to={"/signup"}><li className="md:mx-4 px-4 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none">Sign Up</li>
+                <ReactLink to={"/signup"}><li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">Sign Up</li>
                 </ReactLink>
-                <li className="mx-4 w-5 h-5 hover:text-red-500 hover:border-b-2 border-red-500 cursor-pointer transition-all list-none"><ShoppingCartIcon /></li>
+                <li className="mx-4 w-5 h-5 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ShoppingCartIcon /></li>
             </motion.div>
 
             <div className="md:hidden z-10 duration-150 transition-all" onClick={() => setNav(!nav)}>
@@ -38,12 +38,12 @@ const Navbar = () => {
             </div>
 
             {nav &&
-                <ul className='flex flex-col justify-center items-center absolute top-0 right-0 h-[564px] w-40 bg-red-400 text-black text-xl bg-opacity-90 gap-y-5'>
-                    <Link to='home' smooth className='cursor-pointer hover:underline'>Home</Link>
-                    <Link to='products' smooth className='cursor-pointer hover:underline'>Products</Link>
-                    <ReactLink to={"/login"} smooth className='cursor-pointer hover:underline'>Log In</ReactLink>
-                    <ReactLink to={"/signup"} smooth className='cursor-pointer hover:underline'>Sign Up</ReactLink>
-                    <li className='cursor-pointer w-5 h-5 hover:underline'><ShoppingCartIcon /></li>
+                <ul className='flex flex-col justify-center items-center absolute top-0 right-0 h-[564px] w-40 bg-gray-400 text-black text-xl bg-opacity-90 gap-y-5'>
+                    <Link to='home' smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Home</Link>
+                    <Link to='products' smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Products</Link>
+                    <ReactLink to={"/login"} smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Log In</ReactLink>
+                    <ReactLink to={"/signup"} smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Sign Up</ReactLink>
+                    <li className='cursor-pointer w-5 h-5 hover:underline' onClick={()=>setNav(!nav)}><ShoppingCartIcon /></li>
                 </ul>}
 
 

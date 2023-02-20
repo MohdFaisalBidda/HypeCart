@@ -1,7 +1,7 @@
 import React from 'react'
 import image1 from "../assets/banner.jpg"
-import eco from "../assets/eco-friendly.png"
-import world from "../assets/world.png"
+import open from "../assets/open.png"
+import bag from "../assets/shopping-bag.png"
 import { motion } from "framer-motion"
 import { Link } from 'react-scroll'
 import NewsLetter from './NewsLetter'
@@ -15,8 +15,8 @@ const Home = () => {
     return (
         <>
             <div id='home' className="flex flex-col md:flex-row h-screen justify-center items-center p-10 ">
-                <img src={eco} alt="" className='w-10 absolute left-4 bottom-3' />
-                <img src={world} alt="" className='w-10 absolute right-4 bottom-3' />
+                <img src={bag} alt="" className='w-10 absolute left-4 bottom-3' />
+                <img src={open} alt="" className='w-10 absolute right-4 bottom-3' />
                 <motion.div
                     initial={{ x: 0, opacity: 0 }}
                     whileInView={{ opacity: 80 }}
