@@ -9,7 +9,7 @@ import { Link as ReactLink } from 'react-router-dom'
 const Navbar = () => {
     const [nav, setNav] = useState(false);
     return (
-        <div className='p-6 flex justify-between items-center h-20 sticky top-0 z-10'>
+        <div className='bg-gray-100 p-6 flex justify-between items-center h-20 sticky top-0 z-10'>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
                 whileInView={{ opacity: 80 }}
@@ -30,7 +30,7 @@ const Navbar = () => {
                 </ReactLink>
                 <ReactLink to={"/signup"}><li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">Sign Up</li>
                 </ReactLink>
-                <li className="mx-4 w-5 h-5 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ShoppingCartIcon /></li>
+                <ReactLink to={"/cart"} className="mx-4 w-5 h-5 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ShoppingCartIcon /></ReactLink>
             </motion.div>
 
             <div className="md:hidden z-10 duration-150 transition-all" onClick={() => setNav(!nav)}>
@@ -39,11 +39,11 @@ const Navbar = () => {
 
             {nav &&
                 <ul className='flex flex-col justify-center items-center absolute top-0 right-0 h-[564px] w-40 bg-gray-400 text-black text-xl bg-opacity-90 gap-y-5'>
-                    <Link to='home' smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Home</Link>
-                    <Link to='products' smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Products</Link>
-                    <ReactLink to={"/login"} smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Log In</ReactLink>
-                    <ReactLink to={"/signup"} smooth className='cursor-pointer hover:underline' onClick={()=>setNav(!nav)}>Sign Up</ReactLink>
-                    <li className='cursor-pointer w-5 h-5 hover:underline' onClick={()=>setNav(!nav)}><ShoppingCartIcon /></li>
+                    <ReactLink to={'/'} className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Home</ReactLink>
+                    <ReactLink to={'/category'} className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Products</ReactLink>
+                    <ReactLink to={"/login"} smooth className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Log In</ReactLink>
+                    <ReactLink to={"/signup"} smooth className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Sign Up</ReactLink>
+                    <ReactLink to={"/cart"} className='cursor-pointer w-5 h-5 hover:underline' onClick={() => setNav(!nav)}><ShoppingCartIcon /></ReactLink>
                 </ul>}
 
 

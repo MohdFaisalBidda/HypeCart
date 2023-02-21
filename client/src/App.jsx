@@ -6,6 +6,7 @@ import Login from "./Components/Login"
 import Signup from "./Components/Signup"
 import CategoryProducts from "./Components/CategoryProducts"
 import Layout from "./Components/Layout"
+import Cart from "./Components/Cart"
 
 function App() {
 
@@ -16,9 +17,10 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="/category" element={<Category />} />
           <Route path="/category/:category" element={<CategoryProducts />} />
-          <Route path="/products/:productid" element={<><ParticularProduct /></>} />
+          <Route path="/products/:productid" element={<ParticularProduct />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
     </div>
