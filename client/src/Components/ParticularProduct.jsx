@@ -3,10 +3,13 @@ import { useLocation, useParams } from 'react-router-dom';
 import { data } from "../../data"
 import { motion } from "framer-motion"
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/Slices/cartSlice';
 
 
 const ParticularProduct = () => {
     const [singleProduct, setSingleProduct] = useState([])
+    const dispatch =useDispatch();
     let { productid } = useParams();
     console.log(productid);
 
@@ -27,21 +30,25 @@ const ParticularProduct = () => {
         productData();
     }, [])
 
+    const handleAddToCart =(product)=>{
+        dispatch(addToCart(product));
+    }
+
 
     return (
         <div>
             <>
                 {singleProduct.map((item) => {
                     return (
-                        <div className="flex flex-col md:flex-row justify-center items-center h-screen w-full">
+                        <div key={item._id} className="flex flex-col md:flex-row justify-center items-center h-screen w-full">
                             <motion.div
                                 initial={{ x: 0, opacity: 0 }}
                                 whileInView={{ opacity: 80 }}
                                 transition={{ duration: 1.2 }}
-                                className='mx-10 w-[30rem] p-2 rounded-md'>
-                                <img src={item.image} alt="" className='w-[48rem] h-[40rem] object-contain' />
+                                className='mx-10 md:w-[30rem] p-2 rounded-md'>
+                                <img src={item.image} alt="" className='md:w-[48rem] md:h-[40rem] object-contain' />
                             </motion.div>
-                            <div className="mt-10 mx-10 w-[30rem]">
+                            <div className="m-10 w-[30rem] p-10">
                                 <motion.div
                                     initial={{ x: 0, opacity: 0 }}
                                     whileInView={{ opacity: 80 }}
@@ -50,6 +57,22 @@ const ParticularProduct = () => {
                                     <h1 className='mt-2 mb-2 text-2xl'>{item.title}</h1>
                                     <p className='mb-6 text-sm text-gray-500'>{item.description}</p>
                                 </motion.div>
+                                <div className="my-8 flex items-center justify-between">
+                                    <h2 className='text-4xl font-thin'>$ {item.price}</h2>
+                                    <div className="flex justify-center">
+                                        <h1 className='text-2xl mr-4 '>size</h1>
+                                        <input type="text" className='border border-gray-400 w-20 h-10 rounded-sm' />
+                                    </div>
+
+                                </div>
+                                <div className="my-8 flex justify-between">
+                                    <div className="flex justify-center items-center">
+                                        <h1 className='text-2xl'>Stock</h1>
+                                        <input type="number" className='border border-gray-400 w-14 h-10 rounded-xl ml-4 text-center text-xl' />
+
+                                    </div>
+                                </div>
+                                <button className='mr-8 bg-black p-2 rounded-xl border border-black text-white font-bold hover:bg-white hover:text-black cursor-pointer' onClick={()=>handleAddToCart(item)}>Add To Cart</button>
                                 <Link to={`/`} className='px-4 py-1 text-sm border border-black w-28 h-6 text-black font-bold hover:bg-black hover:text-white cursor-pointer rounded-full mx-auto'>Back To Home</Link>
                             </div>
                         </div>

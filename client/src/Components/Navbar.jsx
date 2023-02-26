@@ -16,7 +16,7 @@ const Navbar = () => {
                 transition={{ duration: 1.2 }}
                 className='text-2xl font-medium md:ml-8 flex justify-center items-center cursor-pointer'>
                 <GlobeAltIcon className='h-6' />
-                <h2 className='border-b-2 border-black ml-1 w-14 hover:w-28 transition-all'><Link to='home' smooth>HypeCart</Link></h2>
+                <h2 className='border-b-2 border-black ml-1 w-14 hover:w-28 transition-all'><ReactLink to={'/'} smooth>HypeCart</ReactLink></h2>
             </motion.div>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
