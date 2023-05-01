@@ -1,44 +1,59 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { clearCart, decreaseCart, removeFromCart } from '../redux/Slices/cartSlice';
 
 const Cart = () => {
+    const [count, setCount] = useState(0);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cartItems);
+    console.log(cart[0].cartQuantity);
+
+    const handleRemove = (product) => {
+        dispatch(removeFromCart(product));
+    }
+
     return (
         <div className='w-full'>
-            <h1 className='text-center text-3xl'>Your Cart</h1>
-            <div className="flex text-xs justify-between py-8 md:text-xl px-10">
-                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2'>Continue Shopping</button>
-                <div className="flex flex-col md:flex-row justify-center items-center">
-                    <p className='leading-5 underline md:mx-4'>Shopping Bag (2)</p>
-                    <p className='leading-5 underline md:mx-4'>Your Wishlist</p>
+            <h1 className='text-center text-3xl font-bold'>Your Cart</h1>
+            <div className="flex text-xs justify-between py-8 lg:text-xl px-10">
+                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2' onClick={() => dispatch(clearCart())}>Clear Cart</button>
+                <div className="flex flex-col lg:flex-row justify-center items-center">
+                    <p className='leading-5 underline lg:mx-4'>Cart Items (2)</p>
+                    <p className='leading-5 underline lg:mx-4'>Your Wishlist</p>
                 </div>
-                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2 hidden md:flex'>Checkout Now</button>
+                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2 hidden lg:flex' onClick={() => navigate("/category")}>Continue Shopping</button>
             </div>
 
-            <div className="flex md:justify-between md:flex-row flex-col md:my-0 my-10">
-                <div className="md:flex-[3] ">
+            <div className="flex lg:justify-between lg:flex-row flex-col lg:my-0 my-10">
+                <div className="lg:flex-[3] ">
                     {cart.map((item) => (
                         <>
-                            <div className="flex justify-between md:flex-row flex-col px-10 ">
-                                <img src={item.image} className='w-[200px] object-contain mx-auto' alt="Hello" />
-                                <div className="md:flex-[2] md:text-start text-center flex flex-col justify-around md:p-20 text-lg">
+                            <div className="flex justify-between lg:flex-row flex-col px-10 py-8 lg:py-0">
+                                <img src={item.image} className='lg:w-[200px] w-[420px] object-contain mx-auto' alt="Hello" />
+                                <div className="lg:flex-[2] lg:text-start flex flex-col justify-around lg:p-20 text-lg my-4 gap-y-4 lg:my-0 lg:gap-y-0">
                                     <h3 className='py-1'><b>Title</b>: {item.title}</h3>
-                                    <h3 className='py-1'><b>Product Desc</b>: {item.description}</h3>
+                                    <h3 className='py-1'><b>Description</b>: {item.description}</h3>
                                     <h3 className='py-1'><b>Color</b>: {item.color}</h3>
                                     <h3 className='py-1'><b>Size</b>: {item.size}</h3>
+                                    <button className='font-thin hover:underline cursor-pointer text-black w-20 rounded-md text-center border border-black mt-1' onClick={() => handleRemove(item)}>Remove</button>
 
                                 </div>
-                                <div className="md:flex-1 flex justify-center items-center text-2xl">
-
-                                    <h2 className='mr-10 font-bold'>+ 1 -</h2>
+                                <div className="lg:flex-1 flex justify-between items-center text-2xl my-2 lg:my-0">
+                                    <div className="flex justify-center items-center">
+                                        <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
+                                        <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={cart[0].cartQuantity} />
+                                        <button className='text-4xl ml-2' onClick={() => setCount(count + 1)}>+</button>
+                                    </div>
                                     <h2>${item.price}</h2>
                                 </div>
                             </div>
-                            <hr className='border-gray-400 md:mt-0 mt-8' />
+                            <hr className='border-gray-400 lg:mt-0 mt-8' />
                         </>
                     ))}
                 </div>
-                <div className="md:flex-[1] h-[34rem] rounded-lg border border-black p-10 mx-10">
+                <div className="lg:flex-[1] h-[34rem] rounded-lg border border-black p-10 m-10">
                     <h1 className='text-3xl font-thin'>ORDER SUMMARY</h1>
                     <div className="flex flex-col">
                         <div className="flex justify-between mt-10 text-lg">

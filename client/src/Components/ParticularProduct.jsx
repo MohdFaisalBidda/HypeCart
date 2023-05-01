@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { data } from "../../data"
 import { motion } from "framer-motion"
 import { Link } from 'react-router-dom'
@@ -9,9 +9,11 @@ import { addToCart } from '../redux/Slices/cartSlice';
 
 const ParticularProduct = () => {
     const [singleProduct, setSingleProduct] = useState([])
-    const dispatch =useDispatch();
+    const [count, setCount] = useState(1);
+    const dispatch = useDispatch();
+    const navigate =useNavigate();
     let { productid } = useParams();
-    console.log(productid);
+    // console.log(productid);
 
     const productData = async () => {
         const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/products/${productid}`, {
@@ -30,8 +32,10 @@ const ParticularProduct = () => {
         productData();
     }, [])
 
-    const handleAddToCart =(product)=>{
+    const handleAddToCart = (product) => {
         dispatch(addToCart(product));
+        navigate("/cart");
+
     }
 
 
@@ -60,19 +64,21 @@ const ParticularProduct = () => {
                                 <div className="my-8 flex items-center justify-between">
                                     <h2 className='text-4xl font-thin'>$ {item.price}</h2>
                                     <div className="flex justify-center">
-                                        <h1 className='text-2xl mr-4 '>size</h1>
-                                        <input type="text" className='border border-gray-400 w-20 h-10 rounded-sm' />
+                                        <h1 className='text-2xl mr-2 '>size:</h1>
+                                        <input type="text" className='border border-gray-400 w-20 h-10 rounded-sm text-center text-xl pointer-events-none' value={item.size} />
                                     </div>
 
                                 </div>
                                 <div className="my-8 flex justify-between">
-                                    <div className="flex justify-center items-center">
-                                        <h1 className='text-2xl'>Stock</h1>
-                                        <input type="number" className='border border-gray-400 w-14 h-10 rounded-xl ml-4 text-center text-xl' />
+                                    <div className="flex justify-center items-center gap-2">
+                                        <button className='text-4xl' onClick={() => setCount(count <= 0 ? 0 : count - 1)}>-</button>
+                                        <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={count} />
+                                        <button className='text-4xl' onClick={() => setCount(count + 1)}>+</button>
+                                        {/* <h1 className='text-2xl'>Stock</h1> */}
 
                                     </div>
                                 </div>
-                                <button className='mr-8 bg-black p-2 rounded-xl border border-black text-white font-bold hover:bg-white hover:text-black cursor-pointer' onClick={()=>handleAddToCart(item)}>Add To Cart</button>
+                                <button className='mr-8 bg-black p-2 rounded-xl border border-black text-white font-bold hover:bg-white hover:text-black cursor-pointer' onClick={() => handleAddToCart(item)}>Add To Cart</button>
                                 <Link to={`/`} className='px-4 py-1 text-sm border border-black w-28 h-6 text-black font-bold hover:bg-black hover:text-white cursor-pointer rounded-full mx-auto'>Back To Home</Link>
                             </div>
                         </div>
