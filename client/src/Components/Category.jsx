@@ -6,7 +6,7 @@ const Category = () => {
   const [catData, setCatData] = useState([]);
 
   const categoryData = async () => {
-    const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories`, {
+    const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}categories`, {
       method: "GET",
       headers: {
         'content-type': 'application/json'
