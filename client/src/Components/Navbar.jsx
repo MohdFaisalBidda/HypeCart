@@ -5,7 +5,7 @@ import { Link } from 'react-scroll'
 import { motion } from 'framer-motion'
 import { Link as ReactLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser, reset } from '../redux/Slices/authSlice'
+import { logoutUser, reset } from '../redux/Slices/AuthSlice'
 
 
 const Navbar = () => {
