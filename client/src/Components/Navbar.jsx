@@ -5,7 +5,7 @@ import { Link } from 'react-scroll'
 import { motion } from 'framer-motion'
 import { Link as ReactLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser, reset } from '../redux/Slices/AuthSlice'
+import { logoutUser, reset } from '../redux/Slices/authSlice'
 
 
 const Navbar = () => {
@@ -62,7 +62,7 @@ const Navbar = () => {
                 <ul className='flex flex-col justify-center items-center absolute top-0 right-0 h-[564px] w-40 bg-gray-400 text-black text-xl bg-opacity-90 gap-y-5'>
                     <ReactLink to={'/'} className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Home</ReactLink>
                     <ReactLink to={'/category'} className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Products</ReactLink>
-                    
+
                     {user ? ((<button onClick={onLogout} className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">{user?.user?.firstName} Logout</button>
                     )) : (<><ReactLink to={"/login"} smooth className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Log In</ReactLink>
                         <ReactLink to={"/signup"} smooth className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Sign Up</ReactLink></>)}
