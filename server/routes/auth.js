@@ -78,6 +78,7 @@ router.post("/login", async(req, res) => {
     }
 
     const token = jwt.sign(payload, "Secret Key.")
+    // console.log(token);
 
     res.json({ user, token })
 })

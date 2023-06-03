@@ -10,6 +10,7 @@ const cartSlice = createSlice({
         cartItems: [],
         cartTotalQuantity: 0,
         cartTotalAmount: 0,
+        cartQuantity:0
     },
     reducers: {
         //removefromcart clearcart decreasecart gettotals
@@ -44,7 +45,7 @@ const cartSlice = createSlice({
             }
         },
 
-        clearCart(state, action) {
+        clearCart(state) {
             state.cartItems = [];
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         }

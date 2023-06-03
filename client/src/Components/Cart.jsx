@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { clearCart, decreaseCart, removeFromCart } from '../redux/Slices/cartSlice';
 
+
 const Cart = () => {
     const [count, setCount] = useState(0);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cartItems);
-    console.log(cart[0].cartQuantity);
+    // console.log(cart[0].cartQuantity);
 
     const handleRemove = (product) => {
         dispatch(removeFromCart(product));
@@ -42,9 +43,9 @@ const Cart = () => {
                                 </div>
                                 <div className="lg:flex-1 flex justify-between items-center text-2xl my-2 lg:my-0">
                                     <div className="flex justify-center items-center">
-                                        <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
+                                        {/* <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
                                         <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={cart[0].cartQuantity} />
-                                        <button className='text-4xl ml-2' onClick={() => setCount(count + 1)}>+</button>
+                                        <button className='text-4xl ml-2' onClick={() => setCount(count + 1)}>+</button> */}
                                     </div>
                                     <h2>${item.price}</h2>
                                 </div>

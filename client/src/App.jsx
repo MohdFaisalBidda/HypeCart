@@ -7,8 +7,11 @@ import Signup from "./Components/Signup"
 import CategoryProducts from "./Components/CategoryProducts"
 import Layout from "./Components/Layout"
 import Cart from "./Components/Cart"
+import { useSelector } from "react-redux"
+
 
 function App() {
+  const { user } = useSelector((state) => state.auth)
 
   return (
     <div className="w-full">
@@ -20,7 +23,7 @@ function App() {
           <Route path="/products/:productid" element={<ParticularProduct />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/cart" element={<Cart />} />
+          {user && (<Route path="/cart" element={<Cart />} />)}
         </Route>
       </Routes>
     </div>
