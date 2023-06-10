@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Link as ReactLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser, reset } from '../redux/Slices/authSlice'
+import { reset as resetCart } from '../redux/Slices/cartSlice'
 
 
 const Navbar = () => {
@@ -20,6 +21,8 @@ const Navbar = () => {
         navigate("/")
         if (logoutUser) {
             dispatch(reset())
+            //TODO: below line should be removed after finding the solution for storing particular user's products in their own cart
+            dispatch(resetCart())
         }
     }
 

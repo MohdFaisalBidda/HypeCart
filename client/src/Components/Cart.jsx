@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { clearCart, decreaseCart, removeFromCart } from '../redux/Slices/cartSlice';
+import { addToCart, clearCart, decreaseCart, getTotal, removeFromCart } from '../redux/Slices/cartSlice';
 
 
 const Cart = () => {
@@ -9,11 +9,16 @@ const Cart = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cartItems);
+    const cartTotal = useSelector((state) => state.cart);
     // console.log(cart[0].cartQuantity);
 
     const handleRemove = (product) => {
         dispatch(removeFromCart(product));
     }
+
+  useEffect(()=>{
+    dispatch(getTotal());
+  },[cart])
 
     return (
         <div className='w-full'>
@@ -21,8 +26,8 @@ const Cart = () => {
             <div className="flex text-xs justify-between py-8 lg:text-xl px-10">
                 <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2' onClick={() => dispatch(clearCart())}>Clear Cart</button>
                 <div className="flex flex-col lg:flex-row justify-center items-center">
-                    <p className='leading-5 underline lg:mx-4'>Cart Items (2)</p>
-                    <p className='leading-5 underline lg:mx-4'>Your Wishlist</p>
+                    {/* <p className='leading-5 underline lg:mx-4'>Cart Items (2)</p> */}
+                    {/* <p className='leading-5 underline lg:mx-4'>Your Wishlist</p> */}
                 </div>
                 <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2 hidden lg:flex' onClick={() => navigate("/category")}>Continue Shopping</button>
             </div>
@@ -43,9 +48,9 @@ const Cart = () => {
                                 </div>
                                 <div className="lg:flex-1 flex justify-between items-center text-2xl my-2 lg:my-0">
                                     <div className="flex justify-center items-center">
-                                        {/* <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
-                                        <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={cart[0].cartQuantity} />
-                                        <button className='text-4xl ml-2' onClick={() => setCount(count + 1)}>+</button> */}
+                                        <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
+                                        <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={cartTotal.cartTotalQuantity} />
+                                        <button className='text-4xl ml-2' onClick={() => dispatch(addToCart(item))}>+</button>
                                     </div>
                                     <h2>${item.price}</h2>
                                 </div>
@@ -57,7 +62,7 @@ const Cart = () => {
                 <div className="lg:flex-[1] h-[34rem] rounded-lg border border-black p-10 m-10">
                     <h1 className='text-3xl font-thin'>ORDER SUMMARY</h1>
                     <div className="flex flex-col">
-                        <div className="flex justify-between mt-10 text-lg">
+                        {/* <div className="flex justify-between mt-10 text-lg">
                             <p>subtotal</p>
                             <p>$80</p>
                         </div>
@@ -68,10 +73,10 @@ const Cart = () => {
                         <div className="flex justify-between mt-10 text-lg">
                             <p>subtotal</p>
                             <p>$80</p>
-                        </div>
+                        </div> */}
                         <div className="flex justify-between mt-10 text-2xl">
                             <p>Total</p>
-                            <p>$80</p>
+                            <p>${cartTotal.cartTotalAmount}</p>
                         </div>
                         <div className="mt-14">
                             <button className='w-full bg-black p-2 rounded-xl text-white font-bold hover:bg-transparent hover:text-black hover:border-black hover:border-2'>Checkout Now</button>

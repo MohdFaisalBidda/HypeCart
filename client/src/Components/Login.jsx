@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { loginUser, logoutUser, reset } from '../redux/Slices/authSlice';
+import BeatLoader from "react-spinners/BeatLoader";
 
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const { user: currentUser, isLoading, isError, isSuccess, message, token } = useSelector((state) => state.auth)
     const [user, setUser] = useState({ email: "", password: "" });
-    console.log(isError);
+    // console.log(isError);
 
     // useEffect(()=>{
     //     if(auth._id){
@@ -62,9 +63,14 @@ const Login = () => {
                 <input required placeholder='Email' className=' md:w-[30rem] w-[20rem] p-2 my-3 rounded-full border border-gray-500' name='email' onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })} value={user.email} autoComplete="true" />
                 <input required type="password" placeholder='Password' className='md:w-[30rem] w-[20rem] p-2 my-3 rounded-full border border-gray-500' name='password' onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })} value={user.password} autoComplete="true" />
 
+                {isLoading &&(
+                    <BeatLoader color="#191919" />
+                )}
+
                 {isError && (<div className="mt-2">
-                    <p className='font-thin md:text-base text-xs text-red-500'>{message.message}</p>
+                    <p className='font-thin text-lg text-red-600'>{message.message}</p>
                 </div>)}
+                
                 <div className="mt-6">
                     <button className='md:w-80 w-48 p-2 bg-black text-white rounded-xl hover:opacity-90' disabled={isLoading}>Login</button>
                 </div>

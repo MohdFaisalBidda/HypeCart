@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, reset } from '../redux/Slices/authSlice';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 
 
@@ -60,11 +61,17 @@ const Signup = () => {
                     <input required placeholder='First Name' className=' md:w-1/2 w-1/2 p-2 my-3 rounded-full border border-gray-500 mx-2' name='firstName' onChange={handleField} value={data.firstName} />
                     <input required placeholder='Last Name' className=' md:w-1/2 w-1/2 p-2 my-3 rounded-full border border-gray-500' name='lastName' onChange={handleField} value={data.lastName} />
                 </div>
-                <input required placeholder='Email' className=' md:w-[30rem] w-[20rem] p-2 my-3 rounded-full border border-gray-500' name='email' onChange={handleField} value={data.email} />
+                <input required placeholder='Email' className=' md:w-[30rem] w-[20rem] p-2 my-3 rounded-full border border-gray-500' type='email' name='email' onChange={handleField} value={data.email} />
                 <input required type="password" placeholder='Password' className='md:w-[30rem] w-[20rem] p-2 my-3 rounded-full border border-gray-500' name='password' onChange={handleField} value={data.password} />
+
+                {isLoading &&(
+                    <BeatLoader color="#191919" />
+                )}
+
                 {isError && (<div className="mt-2">
                     <p className='font-thin md:text-base text-xs'>{message.message}</p>
                 </div>)}
+
                 <div className="mt-6">
                     <button className='md:w-80 w-40 p-2 bg-black text-white rounded-xl hover:opacity-90' disabled={isLoading}>Signup</button>
                 </div>

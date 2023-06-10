@@ -48,10 +48,37 @@ const cartSlice = createSlice({
         clearCart(state) {
             state.cartItems = [];
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-        }
+        },
+
+        //TODO: should be removed after finding the solution for storing particular user's products in their own cart
+        reset(state){
+            state.cartItems = [];
+            state.cartTotalQuantity = 0;
+            state.cartTotalAmount= 0;
+            state.cartQuantity=0;
+    },
+
+    getTotal(state,action){
+       let {total,quantity} = state.cartItems.reduce((cartTotal,cartItems)=>{
+            const {price,cartQuantity} =cartItems;
+            const itemTotal =cartQuantity * price;
+            cartTotal.total += itemTotal;
+            cartTotal.quantity += cartQuantity;
+
+            return cartTotal;
+        },{
+        total:0,
+        quantity:0
+    })
+
+    state.cartTotalQuantity = quantity;
+    state.cartTotalAmount = total;
+    }
+
+      
     }
 })
 
-export const { addToCart, removeFromCart, clearCart, decreaseCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, decreaseCart,reset,getTotal } = cartSlice.actions;
 
 export default cartSlice.reducer;

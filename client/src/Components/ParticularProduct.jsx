@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { data } from "../../data"
 import { motion } from "framer-motion"
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/Slices/cartSlice';
 
 
@@ -11,6 +11,7 @@ const ParticularProduct = () => {
     const [singleProduct, setSingleProduct] = useState([])
     const [count, setCount] = useState(1);
     const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
     const navigate =useNavigate();
     let { productid } = useParams();
     // console.log(productid);
@@ -33,9 +34,12 @@ const ParticularProduct = () => {
     }, [])
 
     const handleAddToCart = (product) => {
-        dispatch(addToCart(product));
-        navigate("/cart");
-
+        if(user == null){
+            navigate("/login");
+        }else{
+            navigate("/cart");
+            dispatch(addToCart(product));
+        }
     }
 
 

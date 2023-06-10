@@ -33,7 +33,7 @@ export const loginUser = createAsyncThunk(
         try {
             const token = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/auth/login`, user)
             localStorage.setItem("token", JSON.stringify(token.data.token))
-            console.log(token);
+            // console.log(token);
 
             return token.data
         } catch (error) {
