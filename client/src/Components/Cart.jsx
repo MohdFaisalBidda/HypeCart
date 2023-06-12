@@ -51,7 +51,7 @@ const Cart = () => {
                                         <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
                                         <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={cartTotal.cartTotalQuantity} />
                                         <button className='text-4xl ml-2' onClick={() => dispatch(addToCart(item))}>+</button>
-                                    </div>
+                                    </div>z
                                     <h2>${item.price}</h2>
                                 </div>
                             </div>
