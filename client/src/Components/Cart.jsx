@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { addToCart, clearCart, decreaseCart, getTotal, removeFromCart } from '../redux/Slices/cartSlice';
 
 
 const Cart = () => {
-    const [count, setCount] = useState(0);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cartItems);
@@ -22,14 +21,14 @@ const Cart = () => {
 
     return (
         <div className='w-full'>
-            <h1 className='text-center text-3xl font-bold'>Your Cart</h1>
+            <h1 className='text-center text-3xl font-bold my-4 '>Your Cart</h1>
             <div className="flex text-xs justify-between py-8 lg:text-xl px-10">
-                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2' onClick={() => dispatch(clearCart())}>Clear Cart</button>
+                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:text-white hover:bg-black hover:border-2' onClick={() => dispatch(clearCart())}>Clear Cart</button>
                 <div className="flex flex-col lg:flex-row justify-center items-center">
                     {/* <p className='leading-5 underline lg:mx-4'>Cart Items (2)</p> */}
                     {/* <p className='leading-5 underline lg:mx-4'>Your Wishlist</p> */}
                 </div>
-                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:bg-transparent hover:text-white hover:bg-black hover:border-2 hidden lg:flex' onClick={() => navigate("/category")}>Continue Shopping</button>
+                <button className='border-2 bg-white px-2 py-1 text-black border-black hover:text-white hover:bg-black hover:border-2 hidden lg:flex' onClick={() => navigate("/category")}>Continue Shopping</button>
             </div>
 
             <div className="flex lg:justify-between lg:flex-row flex-col lg:my-0 my-10">
@@ -51,7 +50,7 @@ const Cart = () => {
                                         <button className='text-4xl mr-2' onClick={()=>dispatch(decreaseCart(item))}>-</button>
                                         <input type="text" className='border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none' value={cartTotal.cartTotalQuantity} />
                                         <button className='text-4xl ml-2' onClick={() => dispatch(addToCart(item))}>+</button>
-                                    </div>z
+                                    </div>
                                     <h2>${item.price}</h2>
                                 </div>
                             </div>

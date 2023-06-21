@@ -5,8 +5,8 @@ import { GrLocation } from 'react-icons/gr';
 
 const Footer = () => {
     return (
-        <div className='flex justify-center items-end px-8 gap-10 pt-16 w-full relative'>
-            <div className=" bottom-0  text-base">{new Date().getFullYear()} <i className='ml-2 text-gray-500 underline'>HypeCart.Inc</i> </div>
+        <div className='flex justify-center items-end pt-14 mb-2 w-full relative'>
+            <div className="absolute bottom-0 text-base">{new Date().getFullYear()} <i className='ml-2 text-gray-500 underline'>HypeCart.Inc</i> </div>
         </div>
     )
 }

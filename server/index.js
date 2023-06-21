@@ -24,5 +24,5 @@ app.use("/api/products",Products);
 
 
 app.listen(process.env.PORT || PORT, (req, res) => {
-    console.log(`Server running at http://localhost:5000`);
+    console.log(`Server running at port ${process.env.PORT}`);
 })

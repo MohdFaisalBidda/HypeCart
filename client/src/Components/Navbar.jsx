@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ShoppingCartIcon, GlobeAltIcon } from '@heroicons/react/24/solid'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-scroll'
+import {ImExit} from "react-icons/im"
 import { motion } from 'framer-motion'
 import { Link as ReactLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,7 +35,7 @@ const Navbar = () => {
                 transition={{ duration: 1.2 }}
                 className='text-2xl font-medium md:ml-8 flex justify-center items-center cursor-pointer'>
                 <GlobeAltIcon className='h-6' />
-                <h2 className='border-b-2 border-black ml-1 w-14 hover:w-28 transition-all'><ReactLink to={'/'} smooth>HypeCart</ReactLink></h2>
+                <h2 className='border-b-2 border-black ml-1 w-14 hover:w-28 transition-all'><ReactLink to={'/'} >HypeCart</ReactLink></h2>
             </motion.div>
             <motion.div
                 initial={{ x: 0, opacity: 0 }}
@@ -46,7 +46,7 @@ const Navbar = () => {
                 <li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ReactLink to={"/"}>Home</ReactLink></li>
                 <li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"><ReactLink to={"/category"}>Products</ReactLink></li>
                 {user ?
-                    (<button onClick={onLogout} className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">{user?.user?.firstName} Logout</button>
+                    (<button onClick={onLogout} className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none flex justify-between items-center">{user?.user?.firstName} <ImExit className="ml-4"/></button>
                     ) :
                     (<><ReactLink to={"/login"}><li className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">Log In</li>
                     </ReactLink>
@@ -63,16 +63,16 @@ const Navbar = () => {
 
             {nav &&
                 <ul className='flex flex-col justify-center items-center absolute top-0 right-0 h-[564px] w-40 bg-gray-400 text-black text-xl bg-opacity-90 gap-y-5'>
-                    <ReactLink to={'/'} className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Home</ReactLink>
-                    <ReactLink to={'/category'} className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Products</ReactLink>
+                    <ReactLink to={'/'} className='cursor-pointer hover:border-b-2 border-black transition-all' onClick={() => setNav(!nav)}>Home</ReactLink>
+                    <ReactLink to={'/category'} className='cursor-pointer hover:border-b-2 border-black transition-all' onClick={() => setNav(!nav)}>Products</ReactLink>
 
-                    {user ? ((<button onClick={onLogout} className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none">{user?.user?.firstName} Logout</button>
-                    )) : (<><ReactLink to={"/login"} smooth className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Log In</ReactLink>
-                        <ReactLink to={"/signup"} smooth className='cursor-pointer hover:underline' onClick={() => setNav(!nav)}>Sign Up</ReactLink></>)}
+                    {user ? ((<button onClick={onLogout} className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none flex justify-between items-center">{user?.user?.firstName} <ImExit className="ml-2"/></button>
+                    )) : (<><ReactLink to={"/login"}  className='cursor-pointer hover:border-b-2 border-black transition-all' onClick={() => setNav(!nav)}>Log In</ReactLink>
+                        <ReactLink to={"/signup"}  className='cursor-pointer hover:border-b-2 border-black transition-all' onClick={() => setNav(!nav)}>Sign Up</ReactLink></>)}
 
 
 
-                    {user && (<ReactLink to={"/cart"} className='cursor-pointer w-5 h-5 hover:underline' onClick={() => setNav(!nav)}><ShoppingCartIcon /></ReactLink>)}
+                    {user && (<ReactLink to={"/cart"} className='cursor-pointer w-5 h-5 hover:border-b-2 border-black transition-all' onClick={() => setNav(!nav)}><ShoppingCartIcon /></ReactLink>)}
 
                 </ul>}
 
