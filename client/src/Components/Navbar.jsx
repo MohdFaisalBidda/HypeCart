@@ -22,7 +22,7 @@ const Navbar = () => {
         if (logoutUser) {
             dispatch(reset())
             //TODO: below line should be removed after finding the solution for storing particular user's products in their own cart
-            dispatch(resetCart())
+            // dispatch(resetCart())
         }
     }
 

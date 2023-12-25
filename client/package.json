@@ -25,6 +25,7 @@
     "react-router-dom": "^6.8.0",
     "react-scroll": "^1.8.9",
     "react-spinners": "^0.13.8",
+    "redux-persist": "^6.0.0",
     "verb": "^0.8.10"
   },
   "devDependencies": {

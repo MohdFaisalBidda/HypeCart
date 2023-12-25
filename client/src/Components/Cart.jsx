@@ -9,7 +9,12 @@ const Cart = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cartItems);
     const cartTotal = useSelector((state) => state.cart);
-    // console.log(cart[0].cartQuantity);
+    const user = useSelector((state) => state.auth);
+    const cartItemUser =JSON.parse(user.token)
+    console.log(user.user.user._id);
+    console.log(cart);
+    console.log(cart.filter((el) => el.userId === user.user.user._id));
+    // console.log(cart.);
 
     const handleRemove = (product) => {
         dispatch(removeFromCart(product));
@@ -33,7 +38,7 @@ const Cart = () => {
 
             <div className="flex lg:justify-between lg:flex-row flex-col lg:my-0 my-10">
                 <div className="lg:flex-[3] ">
-                    {cart.map((item) => (
+                    {cart.filter((el) => el.userId === user.user.user._id).map((item) => (
                         <>
                             <div className="flex justify-between lg:flex-row flex-col px-10 py-8 lg:py-0">
                                 <img src={item.image} className='lg:w-[200px] w-[420px] object-contain mx-auto' alt="Hello" />
