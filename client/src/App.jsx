@@ -31,7 +31,7 @@ import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
-  console.log(user.user.isAdmin);
+  // console.log(user.user.isAdmin);
 
   return (
     <>
@@ -77,7 +77,7 @@ function App() {
               <ProtectedRoutes
                 isAuthenticated={true}
                 adminOnly={true}
-                admin={user.user.isAdmin}
+                admin={user?.user?.isAdmin}
               />
             }
           >

@@ -18,15 +18,14 @@ const Cart = () => {
   const cartItemUser = JSON.parse(user.token);
   console.log(user.user.user._id);
   console.log(cart);
-  console.log(cart.filter((el) => el.userId === user.user.user._id));
-  // console.log(cart.);
+  // console.log(cart.filter((el) => el.userId === user.user.user._id));
 
   const handleRemove = (product) => {
     dispatch(removeFromCart(product));
   };
 
   useEffect(() => {
-    dispatch(getTotal());
+    dispatch(getTotal({ userId: user.user.user._id }));
   }, [cart]);
 
   return (
@@ -98,7 +97,11 @@ const Cart = () => {
                       />
                       <button
                         className="text-4xl ml-2"
-                        onClick={() => dispatch(addToCart(item))}
+                        onClick={() =>
+                          dispatch(
+                            addToCart({ ...item, userId: user.user.user._id })
+                          )
+                        }
                       >
                         +
                       </button>

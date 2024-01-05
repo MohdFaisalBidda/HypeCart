@@ -34,6 +34,7 @@ const CategoryProducts = () => {
     } else {
       navigate("/cart");
       const userId = user.user._id;
+      console.log(userId);
       dispatch(addToCart({ userId, ...product }));
     }
   };
