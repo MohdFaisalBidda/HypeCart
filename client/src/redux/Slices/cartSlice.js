@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const initialState = {
-
-// }
-
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -13,14 +9,15 @@ const cartSlice = createSlice({
     cartQuantity: 0,
   },
   reducers: {
-    //removefromcart clearcart decreasecart gettotals
     addToCart(state, action) {
+      const { userId, _id } = action.payload;
       const userCartItems = state.cartItems.filter(
         (item) => item.userId === action.payload.userId
       );
-      const itemIndex = userCartItems.findIndex(
-        (item) => item.userId == action.payload.userId
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.userId == userId && item._id == _id
       );
+      console.log(itemIndex, userCartItems);
       if (itemIndex >= 0) {
         state.cartItems[itemIndex].cartQuantity += 1;
       } else {
@@ -60,7 +57,6 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    //TODO: should be removed after finding the solution for storing particular user's products in their own cart
     reset(state) {
       state.cartItems = [];
       state.cartTotalQuantity = 0;
@@ -69,13 +65,15 @@ const cartSlice = createSlice({
     },
 
     getTotal(state, action) {
+      const { userId } = action.payload;
       const userCartItems = state.cartItems.filter(
-        (item) => item.userId === action.payload.userId
+        (item) => item.userId === userId
       );
-      console.log(userCartItems);
+
       let { total, quantity } = userCartItems.reduce(
         (cartTotal, cartItems) => {
           const { price, cartQuantity } = cartItems;
+          console.log(cartItems);
           const itemTotal = cartQuantity * price;
           cartTotal.total += itemTotal;
           cartTotal.quantity += cartQuantity;

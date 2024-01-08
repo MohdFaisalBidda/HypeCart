@@ -93,13 +93,13 @@ const Cart = () => {
                       <input
                         type="text"
                         className="border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none"
-                        value={cartTotal.cartTotalQuantity}
+                        value={item.cartQuantity}
                       />
                       <button
                         className="text-4xl ml-2"
                         onClick={() =>
                           dispatch(
-                            addToCart({ ...item, userId: user.user.user._id })
+                            addToCart({ userId: user.user.user._id, ...item })
                           )
                         }
                       >
