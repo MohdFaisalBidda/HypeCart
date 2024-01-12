@@ -39,12 +39,12 @@ const ParticularProduct = () => {
   }, []);
 
   const handleAddToCart = (product) => {
-    if (user == null) {
-      navigate("/login");
-    } else {
+    // if (user == null) {
+    //   navigate("/login");
+    // } else {
       navigate("/cart");
       dispatch(addToCart(product));
-    }
+    // }
   };
 
   return (

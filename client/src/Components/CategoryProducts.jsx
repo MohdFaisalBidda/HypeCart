@@ -11,7 +11,7 @@ const CategoryProducts = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
   const [filterProducts, setFilterProducts] = useState({});
   const [newfilter, setNewFilter] = useState([]);
   const [sort, setSort] = useState("asc");
@@ -29,14 +29,14 @@ const CategoryProducts = () => {
   // console.log(cat, filterProducts, sort);
 
   const handleAddToCart = (product) => {
-    if (user == null) {
-      navigate("/login");
-    } else {
+    // if (user == null) {
+    //   navigate("/login");
+    // } else {
       navigate("/cart");
-      const userId = user.user._id;
-      console.log(userId);
-      dispatch(addToCart({ userId, ...product }));
-    }
+      // const userId = user.user._id;
+      // console.log(userId);
+      dispatch(addToCart({ ...product }));
+    // }
   };
 
   const handleWishlist = (product) => {

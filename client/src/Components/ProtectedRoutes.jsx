@@ -5,7 +5,7 @@ const ProtectedRoutes = ({
   children,
   adminOnly,
   admin,
-  redirect = "/",
+  redirect = "/login",
 }) => {
   if (!isAuthenticated) return <Navigate to={redirect} />;
   if (adminOnly && !admin) return <Navigate to={redirect} />;

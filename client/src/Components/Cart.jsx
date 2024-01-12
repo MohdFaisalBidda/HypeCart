@@ -16,7 +16,7 @@ const Cart = () => {
   const cartTotal = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
   const cartItemUser = JSON.parse(user.token);
-  console.log(user.user.user._id);
+  // console.log(user.user.user._id);
   console.log(cart);
   // console.log(cart.filter((el) => el.userId === user.user.user._id));
 
@@ -25,7 +25,7 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    dispatch(getTotal({ userId: user.user.user._id }));
+    dispatch(getTotal());
   }, [cart]);
 
   return (
@@ -53,7 +53,7 @@ const Cart = () => {
       <div className="flex lg:justify-between lg:flex-row flex-col lg:my-0 my-10">
         <div className="lg:flex-[3] ">
           {cart
-            .filter((el) => el.userId === user.user.user._id)
+            // .filter((el) => el.userId === user.user.user._id)
             .map((item) => (
               <>
                 <div className="flex justify-between lg:flex-row flex-col px-10 py-8 lg:py-0">
@@ -99,7 +99,7 @@ const Cart = () => {
                         className="text-4xl ml-2"
                         onClick={() =>
                           dispatch(
-                            addToCart({ userId: user.user.user._id, ...item })
+                            addToCart({ ...item })
                           )
                         }
                       >
