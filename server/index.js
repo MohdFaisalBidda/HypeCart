@@ -5,6 +5,7 @@ const app = express()
 const bodyParser = require("body-parser")
 const Auth =require("./routes/auth")
 const Products =require("./routes/products")
+const Orders =require("./routes/order")
 const Users =require("./routes/user")
 const cors =require("cors");
 const passport =require("passport")
@@ -21,6 +22,7 @@ app.use("/",ImportData);
 app.use("/api/auth",Auth);
 app.use("/api/users",Users)
 app.use("/api/products",Products);
+app.use("/api/orders",Orders);
 
 
 app.listen(process.env.PORT || PORT, (req, res) => {
