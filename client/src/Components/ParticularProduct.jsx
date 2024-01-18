@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/Slices/cartSlice";
+import axios from "axios";
 
 const ParticularProduct = () => {
   const [singleProduct, setSingleProduct] = useState([]);
@@ -14,121 +15,118 @@ const ParticularProduct = () => {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   let { productid } = useParams();
-  // console.log(productid);
-
-  const productData = async () => {
-    setLoad(true);
-    const res = await fetch(
-      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/products/${productid}`,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-    const data = await res.json();
-    setSingleProduct(data);
-    setLoad(false);
-
-    // console.log(singleProduct);
-  };
 
   useEffect(() => {
+    const productData = async () => {
+      try {
+        setLoad(true);
+        const res = await axios(
+          `${
+            import.meta.env.VITE_REACT_APP_BACKEND_URL
+          }/api/products/find/${productid}`
+        );
+        setSingleProduct(res.data);
+        setLoad(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     productData();
-  }, []);
+  }, [productid]);
 
   const handleAddToCart = (product) => {
     // if (user == null) {
     //   navigate("/login");
     // } else {
-      navigate("/cart");
-      dispatch(addToCart(product));
+    navigate("/cart");
+    dispatch(addToCart(product));
     // }
   };
 
+  console.log([singleProduct]);
   return (
     <div>
       <>
-        {singleProduct.map((item) => {
-          return (
-            <div
-              key={item._id}
-              className="flex flex-col md:flex-row justify-center items-center h-screen w-full"
-            >
-              <motion.div
-                initial={{ x: 0, opacity: 0 }}
-                whileInView={{ opacity: 80 }}
-                transition={{ duration: 1.2 }}
-                className="mx-10 md:w-[30rem] p-2 rounded-md"
+        {[singleProduct] &&
+          [singleProduct].map((item) => {
+            return (
+              <div
+                key={item?._id}
+                className="flex flex-col md:flex-row justify-center items-center h-screen w-full"
               >
-                <img
-                  src={item.image}
-                  alt=""
-                  className="md:w-[48rem] md:h-[40rem] object-contain"
-                />
-              </motion.div>
-              <div className="m-10 w-[30rem] p-10">
                 <motion.div
                   initial={{ x: 0, opacity: 0 }}
                   whileInView={{ opacity: 80 }}
                   transition={{ duration: 1.2 }}
-                  className=""
+                  className="mx-10 md:w-[30rem] p-2 rounded-md"
                 >
-                  <h1 className="mt-2 mb-2 text-2xl">{item.title}</h1>
-                  <p className="mb-6 text-sm text-gray-500">
-                    {item.description}
-                  </p>
+                  <img
+                    src={item?.image}
+                    alt=""
+                    className="md:w-[48rem] md:h-[40rem] object-contain"
+                  />
                 </motion.div>
-                <div className="my-8 flex items-center justify-between">
-                  <h2 className="text-4xl font-thin">$ {item.price}</h2>
-                  <div className="flex justify-center">
-                    <h1 className="text-2xl mr-2 ">size:</h1>
-                    <input
-                      type="text"
-                      className="border border-gray-400 w-20 h-10 rounded-sm text-center text-xl pointer-events-none"
-                      value={item.size}
-                    />
+                <div className="m-10 w-[30rem] p-10">
+                  <motion.div
+                    initial={{ x: 0, opacity: 0 }}
+                    whileInView={{ opacity: 80 }}
+                    transition={{ duration: 1.2 }}
+                    className=""
+                  >
+                    <h1 className="mt-2 mb-2 text-2xl">{item?.title}</h1>
+                    <p className="mb-6 text-sm text-gray-500">
+                      {item?.description}
+                    </p>
+                  </motion.div>
+                  <div className="my-8 flex items-center justify-between">
+                    <h2 className="text-4xl font-thin">$ {item?.price}</h2>
+                    <div className="flex justify-center">
+                      <h1 className="text-2xl mr-2 ">size:</h1>
+                      <input
+                        type="text"
+                        className="border border-gray-400 w-20 h-10 rounded-sm text-center text-xl pointer-events-none"
+                        value={item?.size}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="my-8 flex justify-between">
-                  <div className="flex justify-center items-center gap-2">
-                    <button
-                      className="text-4xl"
-                      onClick={() => setCount(count <= 0 ? 0 : count - 1)}
-                    >
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none"
-                      value={count}
-                    />
-                    <button
-                      className="text-4xl"
-                      onClick={() => setCount(count + 1)}
-                    >
-                      +
-                    </button>
-                    {/* <h1 className='text-2xl'>Stock</h1> */}
+                  <div className="my-8 flex justify-between">
+                    <div className="flex justify-center items-center gap-2">
+                      <button
+                        className="text-4xl"
+                        onClick={() => setCount(count <= 0 ? 0 : count - 1)}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        className="border border-gray-400 w-14 h-10 rounded-lg text-center text-xl pointer-events-none"
+                        value={count}
+                      />
+                      <button
+                        className="text-4xl"
+                        onClick={() => setCount(count + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
+                  <button
+                    className="mr-8 bg-black p-2 rounded-xl border border-black text-white font-bold hover:bg-white hover:text-black cursor-pointer"
+                    onClick={() => handleAddToCart(item)}
+                  >
+                    Add To Cart
+                  </button>
+                  <Link
+                    to={`/`}
+                    className="px-4 py-1 text-sm border border-black w-28 h-6 text-black font-bold hover:bg-black hover:text-white cursor-pointer rounded-full mx-auto"
+                  >
+                    Back To Home
+                  </Link>
                 </div>
-                <button
-                  className="mr-8 bg-black p-2 rounded-xl border border-black text-white font-bold hover:bg-white hover:text-black cursor-pointer"
-                  onClick={() => handleAddToCart(item)}
-                >
-                  Add To Cart
-                </button>
-                <Link
-                  to={`/`}
-                  className="px-4 py-1 text-sm border border-black w-28 h-6 text-black font-bold hover:bg-black hover:text-white cursor-pointer rounded-full mx-auto"
-                >
-                  Back To Home
-                </Link>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
 
         {load && (
           <div className="flex flex-col md:flex-row justify-center items-center h-screen w-full">

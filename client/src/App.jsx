@@ -31,7 +31,7 @@ import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
-  // console.log(user.user.isAdmin);
+  console.log(user);
 
   return (
     <>

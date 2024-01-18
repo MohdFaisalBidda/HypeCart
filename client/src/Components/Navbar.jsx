@@ -13,7 +13,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
+  console.log(cartTotalQuantity);
 
   const onLogout = () => {
     dispatch(logoutUser(user));
@@ -57,10 +58,10 @@ const Navbar = () => {
                 onClick={onLogout}
                 className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none flex justify-between items-center"
               >
-                {user?.user?.firstName} <ImExit className="ml-4" />
+                {user?.firstName} <ImExit className="ml-4" />
               </button>
               <ul>
-                {user?.user?.isAdmin && (
+                {user?.isAdmin && (
                   <ReactLink
                     to={"/admin/dashboard"}
                     className="mx-4 w-5 h-5 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"
@@ -88,8 +89,11 @@ const Navbar = () => {
           )}
           <ReactLink
             to={"/cart"}
-            className="mx-4 w-5 h-5 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none"
+            className="mx-4 w-5 h-5 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none relative"
           >
+            <span className="absolute bg-amber-500 rounded-full w-6 h-6 text-center -right-4 -top-4 text-md">
+              {cartTotalQuantity}
+            </span>
             <ShoppingCartIcon />
           </ReactLink>
         </motion.div>
@@ -126,7 +130,7 @@ const Navbar = () => {
                 onClick={onLogout}
                 className="md:mx-4 px-4 hover:text-gray-500 hover:border-b-2 border-black cursor-pointer transition-all list-none flex justify-between items-center"
               >
-                {user?.user?.firstName} <ImExit className="ml-2" />
+                {user?.firstName} <ImExit className="ml-2" />
               </button>
             ) : (
               <>

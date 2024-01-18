@@ -4,6 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { addToCart } from "../redux/Slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist } from "../redux/Slices/wishlistSlice";
+import axios from "axios";
 
 const CategoryProducts = () => {
   const [products, setProducts] = useState([]);
@@ -15,8 +16,8 @@ const CategoryProducts = () => {
   const [filterProducts, setFilterProducts] = useState({});
   const [newfilter, setNewFilter] = useState([]);
   const [sort, setSort] = useState("asc");
+  const cat = location.pathname.split("/")[2];
 
-  const cat = location.pathname.slice(10);
   // console.log(cat);
 
   const handleFilter = (e) => {
@@ -32,10 +33,10 @@ const CategoryProducts = () => {
     // if (user == null) {
     //   navigate("/login");
     // } else {
-      navigate("/cart");
-      // const userId = user.user._id;
-      // console.log(userId);
-      dispatch(addToCart({ ...product }));
+    navigate("/cart");
+    // const userId = user.user._id;
+    // console.log(userId);
+    dispatch(addToCart({ ...product }));
     // }
   };
 
@@ -48,25 +49,22 @@ const CategoryProducts = () => {
     }
   };
 
-  const productData = async () => {
-    setLoad(true);
-    const res = await fetch(
-      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/products`,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-    const Data = await res.json();
-    setProducts(Data);
-    setLoad(false);
-  };
-
   useEffect(() => {
+    const productData = async () => {
+      const cat = location.pathname.split("/")[2];
+      setLoad(true);
+      const res = await axios.get(
+        cat
+          ? `${
+              import.meta.env.VITE_REACT_APP_BACKEND_URL
+            }/api/products?category=${cat}`
+          : `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/products`
+      );
+      setProducts(res.data);
+      setLoad(false);
+    };
     productData();
-  }, []);
+  }, [cat]);
 
   useEffect(() => {
     setNewFilter(
@@ -142,7 +140,7 @@ const CategoryProducts = () => {
       <div className="mx-10 flex justify-center items-center my-40">
         <div className="text-center rounded-md grid grid-cols-1 md:grid-cols-2 gap-y-40 gap-x-80 place-items-center">
           {newfilter
-            ?.filter((item) => item.category === cat)
+            // ?.filter((item) => item.category === cat)
             ?.map((item) => {
               return (
                 <>
